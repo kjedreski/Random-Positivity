@@ -1,0 +1,7 @@
+
+In a local DB, the following scheme exists as a SQLITE DB
+
+CREATE TABLE "PositiveQuotes" (
+	"Author"	TEXT,
+	"Quote"	TEXT
+)
