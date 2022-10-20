@@ -6,23 +6,24 @@ import ExtractQuotes
 import sqlite3
 from sqlite3 import Error
 
-codeBank = [
+code_bank = [
     'Good Luck!, Remember this is a game about teamwork and positivity',
     'Wow! Nice one:)',
     'Have a great day all!',
 ]
 
-positiveQuoteBank = []
+positive_quote_bank = []
 
 
+#Local testing only.
 def local_test_run():
     while (True):
         rng = random.randrange(1, 3)
-        rngCodeBankIndex = random.randrange(0, 3)
+        rng_code_bank_index = random.randrange(0, 3)
         x = datetime.datetime.now()
-        randomCode = codeBank[rngCodeBankIndex].format(x.strftime("%X"), rng)
-        # randomCode = niceCompBank[rngCodeBankIndex]
-        pyperclip.copy(randomCode)
+        random_code = code_bank[rng_code_bank_index].format(x.strftime("%X"), rng)
+        # random_code = niceCompBank[rng_code_bank_index]
+        pyperclip.copy(random_code)
         pyperclip.paste()
         time.sleep(10)
 
@@ -32,10 +33,10 @@ def main():
     # create a database connection
     conn = ExtractQuotes.create_connection(database)
     rng = 100
-    positiveQuoteBank = ExtractQuotes.read_quotes(conn, rng)
+    quotes = ExtractQuotes.read_quotes(conn, rng)
     while (True):
         rngCodeBankIndex = random.randrange(0, 100)
-        posQuote = positiveQuoteBank[rngCodeBankIndex]
+        posQuote = quotes[rngCodeBankIndex]
         # print("'{}' - {}".format(posQuote[1],posQuote[0]))
         pyperclip.copy("'{}' - {}".format(posQuote[1], posQuote[0]))
         pyperclip.paste()
