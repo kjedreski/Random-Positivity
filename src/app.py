@@ -2,9 +2,10 @@ import pyperclip
 import random
 import datetime
 import time
-import ExtractQuotes
-import sqlite3
-from sqlite3 import Error
+from src import ExtractQuotes
+from threading import Thread
+import requests
+
 
 code_bank = [
     'Good Luck!, Remember this is a game about teamwork and positivity',
@@ -13,6 +14,43 @@ code_bank = [
 ]
 
 positive_quote_bank = []
+
+class AsyncQuotesOnGoing(Thread):
+    def __init__(self, url):
+        super().__init__()
+        self.html = None
+        self.url = url
+
+    def run(self):
+        response = requests.get(self.url)
+        self.html = response.text
+
+def handle_download(self):
+    url = self.url_var.get()
+    if url:
+        self.download_button['state'] = tk.DISABLED
+        self.html.delete(1.0, "end")
+
+        download_thread = AsyncDownload(url)
+        download_thread.start()
+
+        self.monitor(download_thread)
+    else:
+        showerror(title='Error',
+                message='Please enter the URL of the webpage.')
+
+
+def monitor(self, thread):
+    if thread.is_alive():
+        # check the thread every 100ms
+        self.after(100, lambda: self.monitor(thread))
+    else:
+        self.html.insert(1.0, thread.html)
+        self.download_button['state'] = tk.NORMAL
+
+
+
+
 
 
 #Local testing only.
@@ -43,5 +81,9 @@ def main():
         time.sleep(10)
 
 
-main()
+def end():
+    return
+
+
+#main()
 # local_test_run()
